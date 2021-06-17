@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Main {
+    + Names: List
+
+    + scanNamesFromFile()
+    + createOutputFile()
+    + printToFile()
+}
+
+class Sort {
+    + sortAlphabetically()
+}
+
+Main o--> Sort
+Main <|-- Sort
+
+@enduml
