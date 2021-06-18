@@ -1,35 +1,96 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 3 Solution
+ *  Copyright 2021 Gabriel Fernandez
+ */
+
 package oop.assignment3.ex41.base;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+// Import required libraries
+import org.jetbrains.annotations.NotNull;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.File;
-
-//www.java67.com/2016/07/how-to-read-text-file-into-arraylist-in-java.html#ixzz6y3TtGOsX
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Solution41 {
+    public static int counter;
+
+    // Main function
     public static void main(String[] args) {
-        List<String> names = new ArrayList<>();
+        // Declare variables
+        ArrayList<String> names;
+        ArrayList<String> sortedNames;
 
-        try {
-            File input = new File("exercise41_input.txt");
-            Scanner reader = new Scanner(input);
+        // Scan in strings from input file
+        names = getNames();
 
-            while (reader.hasNextLine()) {
-                names.add(reader.nextLine());
-            }
+        // Sort strings in alphabetical order
+        SortAlphabetically sort = new SortAlphabetically();
+        sortedNames = sort.sortAlphabetical(names);
 
-            reader.close();
-        }
-        catch (FileNotFoundException e){
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        // Create output file
+        if (createOutput()) {
+            // Print correctly formatted sorted strings to output file
+            printToOutput(sortedNames);
         }
     }
 
-    // Sort the names in the ArrayList
+    @NotNull
+    public static ArrayList<String> getNames() {
+        ArrayList<String> names = new ArrayList<>();
 
+        //      Use a try catch to make sure file exists
+        try {
+            File inputFile = new File("src/main/java/oop/assignment3/ex41/base/exercise41_input.txt");
+            Scanner reader = new Scanner(inputFile);
 
-    // Print out the sorted names with proper formatting
+            while (reader.hasNextLine()) {
+                names.add(reader.nextLine());
+                //      Use a counter to count the number of names as they're being scanned
+                counter++;
+            }
+            reader.close();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return names;
+    }
+
+    public static boolean createOutput() {
+        //      Use a try catch to make sure file was created
+        try {
+            File output = new File("exercise41_output.txt");
+
+            if (output.createNewFile()) {
+                return true;
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static void printToOutput (ArrayList<String> output) {
+        //      Use a try catch to make sure file exists
+        try {
+            FileWriter writer = new FileWriter("exercise41_output.txt");
+            writer.write("Total of " + counter + " names\n");
+            writer.write("-----------------\n");
+
+            for (int i = 0; i < counter; i++) {
+                writer.write(output.get(i) + "\n");
+            }
+
+            writer.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

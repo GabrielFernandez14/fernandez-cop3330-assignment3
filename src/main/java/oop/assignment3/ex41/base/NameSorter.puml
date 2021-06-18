@@ -2,15 +2,17 @@
 'https://plantuml.com/sequence-diagram
 
 class Main {
-    + Names: List
+    + names: ArrayList
 
     + scanNamesFromFile()
     + createOutputFile()
-    + printToFile()
+    + printToFile(sortedNames)
 }
 
 class Sort {
-    + sortAlphabetically()
+    + sortedNames: ArrayList
+    
+    + sortAlphabetically(names)
 }
 
 Main o--> Sort
