@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Main {
+    + output: String
+    + printTable: output
+}
+
+class ParseDataFile {
+    + getTable()
+}
+
+Main --|> ParseDataFile
+ParseDataFile o--> Main
+@enduml

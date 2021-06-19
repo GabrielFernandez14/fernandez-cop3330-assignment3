@@ -3,6 +3,7 @@
 
 class Main {
     + names: ArrayList
+    + counter: int
 
     + scanNamesFromFile()
     + createOutputFile()
@@ -11,7 +12,7 @@ class Main {
 
 class Sort {
     + sortedNames: ArrayList
-    
+
     + sortAlphabetically(names)
 }
 
