@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Main {
+    + siteName: String
+    + author: String
+
+    + promptUserForInput()
+}
+
+class WebsiteGenerator {
+    + createWebsite(siteName)
+    + createHtml(siteName, author)
+    if (js yes?) then (yes)
+        + : createJSFile()
+    if (css yes?) then (yes)
+        + : createCSSFile()
+}
+
+Main --|> WebsiteGenerator
+WebsiteGenerator o--> Main
+@enduml
