@@ -46,12 +46,12 @@ public class WordFinder {
         //              Use a try catch to make sure file was created
         try {
             //              Prompt the user for the name
-            System.out.println("What is the output file's name? (Include .txt): ");
+            System.out.println("What is the output file's name?:");
             Scanner in = new Scanner(System.in);
 
-            String outputFile = in.nextLine();
+            String outputFile = in.next();
 
-            File output = new File(outputFile);
+            File output = new File(outputFile + ".txt");
             outputName = output;
 
 
