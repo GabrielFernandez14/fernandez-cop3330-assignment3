@@ -5,57 +5,69 @@
 
 package oop.assignment3.ex43.base;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Locale;
 
-public class WebsiteGenerator {
+class WebsiteGenerator {
     public final String yes = "YES";
 
+    // Create website file
     public String createWebsite(String name, String author, String js, String css) {
         String output = "";
 
+        //      Create the file
         String curDir = System.getProperty("user.dir");
         curDir += "\\" + name;
 
         File site = new File(curDir);
         boolean isCreated = site.mkdir();
 
+        //      Check if the file was created
         if (isCreated) {
+            //          If yes, print corresponding "Created..." statement
             output += "Created ./website/" + name + "\n";
 
             try {
+                //          The file was created, so create the index.html file
                 output += createHtml(curDir, name, author);
+                //              Create the JavaScript file
                 output += createJS(curDir, name, js);
+                //              Create the CSS file
                 output += createCSS(curDir, name, css);
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        //          If no, let the user know something went wrong
         else {
-            System.out.println("An error occurred.");
+            output = "An error occurred.";
         }
 
         return output;
     }
 
     public String createHtml(String curDir, String name, String author) throws IOException {
-        FileWriter writer = new FileWriter(curDir + "\\index.html");
+        String html = "<title>" + name + "</title><h1>" + name + "</h1><head><meta author>" + author + "</head>";
+        File htmlFile = new File(curDir + "\\index.html");
 
-        writer.write("<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n");
-        writer.write("\t<meta author=\"" + author + "\">\n");
-        writer.write("\t<title>" + name + "</title>\n");
-        writer.write("</head>\n<body>\n\n</body>\n</html>");
-        writer.close();
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(htmlFile));
+            bw.write(html);
+            bw.close();
+            return "Created ./website/" + name + "/index.html" + "\n";
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return "Created ./website/" + name + "/index.html" + "\n";
+        return "";
     }
 
-    public String createJS(String curDir, String name, @NotNull String js) {
+    public String createJS(String curDir, String name, String js) {
+        //          Check if the user wants the JavaScript file to be created
         if (js.equals("y") || js.equals("Y") || js.equals(yes.toLowerCase(Locale.ROOT))) {
             File jsFile = new File(curDir + "\\js");
             boolean jsExists = jsFile.mkdir();
@@ -71,7 +83,8 @@ public class WebsiteGenerator {
         return "";
     }
 
-    public String createCSS(String curDir, String name, @NotNull String css) {
+    public String createCSS(String curDir, String name, String css) {
+        //          Check if the user wants the CSS file to be created
         if (css.equals("y") || css.equals("Y") || css.equals(yes.toLowerCase(Locale.ROOT))) {
             File cssFile = new File(curDir + "\\css");
             boolean cssExists = cssFile.mkdir();

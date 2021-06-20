@@ -14,17 +14,19 @@ public class Solution43 {
     public static final String promptCSS = "Do you want a folder for CSS? ";
     public static final Scanner in = new Scanner(System.in);
 
+    // Main function
     public static void main(String[] args) {
+        // Get input from the user
         String siteName = getInput(promptSite);
         String author = getInput(promptAuthor);
         String js = getInput(promptJS);
         String css = getInput(promptCSS);
 
+        // Generate the required files
         WebsiteGenerator wg = new WebsiteGenerator();
         String output = wg.createWebsite(siteName, author, js, css);
 
-        in.close();
-
+        // Print the appropriate output
         System.out.println(output);
     }
 
