@@ -4,17 +4,22 @@
 class Main {
     + siteName: String
     + author: String
+    + js: String
+    + css: String
 
     + promptUserForInput()
+    + printOutput()
 }
 
 class WebsiteGenerator {
-    + createWebsite(siteName)
-    + createHtml(siteName, author)
+    - path: String
+
+    + createWebsite(siteName, author, js, css)
+    + createHtml(path, siteName, author)
     if (js yes?) then (yes)
-        + : createJSFile()
+        + : createJSFile(path, js)
     if (css yes?) then (yes)
-        + : createCSSFile()
+        + : createCSSFile(path, css)
 }
 
 Main --|> WebsiteGenerator
