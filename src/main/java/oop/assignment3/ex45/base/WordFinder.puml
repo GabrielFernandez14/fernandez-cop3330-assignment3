@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Main {
+    + readFile()
+    + identifyOccurrences()
+    + printModifiedToNew()
+}
+
+class ReplaceWord {
+    while (File is not null?)
+        + replaceWords()
+    endwhile
+}
+
+Main o--> ReplaceWord
+Main <|- ReplaceWord
+@enduml
