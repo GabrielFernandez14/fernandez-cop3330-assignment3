@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Main {
+    + parseData()
+    + printOutput()
+}
+
+class ProductSearch {
+    while (Product found?)
+        if (Product found?) then (yes)
+            :storeOutput(name, price, quantity)
+        else
+            :continue
+    endwhile
+}
+
+Main --|> ProductSearch
+Main <--o ProductSearch
+@enduml
