@@ -6,8 +6,16 @@
 package oop.assignment3.ex44.base;
 
 public class Solution44 {
+    // Main function
     public static void main(String[] args) {
         ProductSearch ps = new ProductSearch();
-        ps.getProduct();
+        // Print output statement for when user correctly identifies
+        // a product
+        if (ps.getProduct()) {
+            // StringBuilder output = printOutput();
+        }
+        else {
+            //
+        }
     }
 }
